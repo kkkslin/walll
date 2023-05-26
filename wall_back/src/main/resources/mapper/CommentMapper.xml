@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wall_back.mapper.CommentMapper">
+    <insert id="up_comment" parameterType="com.example.wall_back.entity.Comment">
+        insert wall.comment values (#{id},#{text},#{content_type},#{media_url},
+                                    #{ownername}, #{post_time},#{post_id})
+    </insert>
+
+    <delete id="comment_delete" parameterType="com.example.wall_back.entity.Comment">
+        DELETE FROM wall.comment where id=#{comment_id}
+    </delete>
+
+    <select id="get_comments" resultType="com.example.wall_back.entity.Comment">
+        select * from wall.comment
+        where post_id = #{post_id}
+        LIMIT #{limit},#{size}
+    </select>
+
+    <select id="my_comments" resultType="com.example.wall_back.entity.Comment">
+        select * from wall.comment
+        where ownername = #{username}
+        LIMIT #{limit},#{size}
+    </select>
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wall_back.mapper.PostMapper">
+    <insert id="up_post" parameterType="com.example.wall_back.entity.Post">
+        insert wall.post values (#{id},#{title},#{text},#{content_type},
+                                 #{media_url},#{location_x},#{location_y},
+                                 #{ownername}, #{post_time},0)
+    </insert>
+
+    <select id="post_detail" parameterType="com.example.wall_back.entity.Post" resultType="com.example.wall_back.entity.Post">
+        select * from wall.post where id=#{post_id}
+    </select>
+
+    <delete id="post_delete" parameterType="com.example.wall_back.entity.Post">
+        DELETE FROM wall.post where id=#{post_id}
+    </delete>
+
+    <select id="get_posts" resultType="com.example.wall_back.entity.Post">
+        select * from wall.post
+        where (location_x-#{location_x})*(location_x-#{location_x})
+            + (location_y-#{location_y})*(location_y-#{location_y}) <![CDATA[<=]]> #{distance}*#{distance}
+        order by post_time  DESC
+        LIMIT #{limit},#{size}
+    </select>
+
+    <select id="my_posts" resultType="com.example.wall_back.entity.Post">
+        select * from wall.post
+        where ownername = #{username}
+        order by post_time  DESC
+        LIMIT #{limit},#{size}
+    </select>
+
+    <select id="update_posts_get" resultType="com.example.wall_back.entity.Post">
+        select * from wall.post
+        where  id = #{post_id}
+    </select>
+
+    <select id="update_posts" parameterType="com.example.wall_back.entity.Post">
+        UPDATE wall.post
+        SET text = #{text},title=#{title}
+        WHERE id = #{post_id};
+    </select>
+
+    <select id="check_posts_list" resultType="com.example.wall_back.entity.Post">
+        select * from wall.post
+        where checked = #{checked}
+        order by post_time  DESC
+        LIMIT #{limit},#{size}
+    </select>
+
+    <update id="post_check" parameterType="com.example.wall_back.entity.Post">
+        UPDATE wall.post
+        SET checked = 1
+        WHERE id = #{post_id};
+    </update>
+</mapper>

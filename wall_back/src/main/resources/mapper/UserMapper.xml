@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.wall_back.mapper.UserMapper">
+
+    <insert id="register" parameterType="com.example.wall_back.entity.User">
+        insert wall.user values (#{userId},#{userName},#{password},false);
+    </insert>
+
+
+    <select id="login" parameterType="com.example.wall_back.entity.User" resultType="com.example.wall_back.entity.User">
+        select * from wall.user where userName=#{username}
+    </select>
+
+    <update id="modify" parameterType="com.example.wall_back.entity.User">
+        UPDATE wall.user
+        SET userName = #{new_username},password=#{new_password}
+        WHERE userName=#{old_username}
+    </update>
+</mapper>
+
