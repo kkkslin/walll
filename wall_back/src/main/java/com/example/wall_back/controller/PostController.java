@@ -49,7 +49,7 @@ public class PostController {
         if(content_type==1){
             if(file==null)
                 return new JsonResult<>(-1,"file not existing", map);
-            //System.out.println(file);
+            //fSystem.out.println(file);
             try {
                 String originalFileName = file.getOriginalFilename().replaceAll(",|&|=", "");
                 String type = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
@@ -139,6 +139,8 @@ public class PostController {
             map.put("media_url",post.getMedia_url());
             map.put("location_x",post.getLocation_x());
             map.put("location_y",post.getLocation_y());
+            map.put("post_time",post.getPost_time());
+            map.put("ownername",post.getOwnername());
             return new JsonResult<>(0,"",map);
         }catch (Exception e)
         {
@@ -150,6 +152,7 @@ public class PostController {
     @ResponseBody
     public JsonResult<Map> post_delete( @RequestParam("post_id") String post_id )
     {
+
         Map<String, Object> map = new HashMap<>(3);
         try {
             postRepository.post_delete(post_id);
@@ -225,6 +228,7 @@ public class PostController {
     public JsonResult<Map> check_posts_list( @RequestParam("page_num")  int page_num,
                                              @RequestParam("page_size") int page_size,
                                              @RequestParam("checked") int checked){
+
         Map<String, Object> map = new HashMap<>(3);
         try {
             List<Post> post = postRepository.check_posts_list(page_num,page_size,checked);
@@ -239,6 +243,11 @@ public class PostController {
     @RequestMapping(value = "/check",method = RequestMethod.POST,params = {"post_id"})
     @ResponseBody
     public JsonResult<Map> check_post( @RequestParam("post_id") String post_id){
+        System.out.println("~~");
+
+        System.out.println(post_id);
+        System.out.println(post_id.length());
+        System.out.println("~~");
         Map<String, Object> map = new HashMap<>(3);
         try {
             postRepository.check_post(post_id);

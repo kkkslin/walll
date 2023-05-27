@@ -18,8 +18,8 @@
 
     <select id="get_posts" resultType="com.example.wall_back.entity.Post">
         select * from wall.post
-        where (location_x-#{location_x})*(location_x-#{location_x})
-            + (location_y-#{location_y})*(location_y-#{location_y}) <![CDATA[<=]]> #{distance}*#{distance}
+        where (st_distance_sphere(point(location_x/10000,location_y/10000),point(#{location_x}/10000,#{location_y}/10000)) )
+                  <![CDATA[<=]]>  #{distance}
         order by post_time  DESC
         LIMIT #{limit},#{size}
     </select>
