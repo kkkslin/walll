@@ -23,9 +23,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void modify(String old_username,String new_username,String new_password)
+    public void modify(String username,String new_password)
     {
-        userMapper.modify(old_username,new_username, new_password);
+        userMapper.modify(username, new_password);
     }
 }
 

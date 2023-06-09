@@ -13,6 +13,6 @@ public interface UserMapper {
     User login(@RequestParam String username,@RequestParam String password);
     // Boolean update(String userId,Boolean status);
 
-    void modify(@RequestParam String old_username,@RequestParam String new_username,@RequestParam String new_password);
+    void modify(@RequestParam String username,@RequestParam String new_password);
 }
 

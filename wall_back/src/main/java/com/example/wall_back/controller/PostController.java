@@ -21,7 +21,6 @@ public class PostController {
     @Autowired
     private PostRepository postRepository;
 
-
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public JsonResult<Map> up_post( @RequestPart(required = false) MultipartFile file,
@@ -66,7 +65,7 @@ public class PostController {
                     targetFile.getParentFile().mkdirs();
                 }
                 file.transferTo(targetFile);
-                media_url = "http://192.168.0.124:9001/"+fileName;
+                media_url = "http://192.168.0.117:9001/"+fileName;
             } catch (Exception e) {
                 return new JsonResult<>(-1,e.getMessage(), map);
             }

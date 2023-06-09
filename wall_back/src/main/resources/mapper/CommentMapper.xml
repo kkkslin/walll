@@ -14,12 +14,14 @@
     <select id="get_comments" resultType="com.example.wall_back.entity.Comment">
         select * from wall.comment
         where post_id = #{post_id}
+        order by post_time
         LIMIT #{limit},#{size}
     </select>
 
     <select id="my_comments" resultType="com.example.wall_back.entity.Comment">
         select * from wall.comment
         where ownername = #{username}
+        order by post_time  DESC
         LIMIT #{limit},#{size}
     </select>
 </mapper>

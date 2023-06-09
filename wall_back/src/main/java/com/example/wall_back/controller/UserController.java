@@ -70,19 +70,18 @@ public class UserController {
     @ResponseBody
     public JsonResult<Map> modify(@RequestParam String old_password,
                                   @RequestParam String new_password,
-                                  @RequestParam String old_username,
-                                  @RequestParam String new_username) {
+                                  @RequestParam String username) {
         Map<String, Object> map = new HashMap<>(3);
-        User user = userRepository.login(old_username, old_password);
+        User user = userRepository.login(username, old_password);
         if (user.getPassword().equals(old_password)) {
             try {
-                userRepository.modify(old_username,new_username,new_password);
+                userRepository.modify(username,new_password);
                 return new JsonResult<>(0, "", map);
             } catch (Exception e) {
                 return new JsonResult<>(-1, e.getMessage(), map);
             }
         } else {
-            return new JsonResult<>(-1, "eooro old-password", map);
+            return new JsonResult<>(-1, "error password", map);
         }
     }
 }

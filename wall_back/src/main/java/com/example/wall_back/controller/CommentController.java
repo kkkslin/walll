@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping(value="/api/comment")
 public class CommentController {
@@ -62,7 +63,7 @@ public class CommentController {
 
                 file.transferTo(targetFile);
 
-                media_url = "http://192.168.0.124:9001/"+fileName;
+                media_url = "http://192.168.0.117:9001/"+fileName;
             } catch (Exception e) {
                 return new JsonResult<>(-1,e.getMessage(), map);
             }
@@ -122,6 +123,7 @@ public class CommentController {
     public JsonResult<Map> my_comments( @RequestParam("page_num")  int page_num,
                                          @RequestParam("page_size") int page_size,
                                          @RequestParam("username") String username){
+        System.out.println(username);
         Map<String, Object> map = new HashMap<>(3);
         if(username==null||username.length()==0)
             return new JsonResult<>(-1,"unknown username",map);

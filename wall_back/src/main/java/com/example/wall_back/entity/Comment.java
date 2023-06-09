@@ -11,6 +11,16 @@ public class Comment {
     String ownername;
     String post_id;
 
+    public String getPost_time() {
+        return post_time;
+    }
+
+    public void setPost_time(String post_time) {
+        this.post_time = post_time;
+    }
+
+    String post_time;
+
     public String getId() {
         return id;
     }
